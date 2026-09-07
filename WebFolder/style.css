@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #0b1220;
+  --panel: #121b2e;
+  --panel-border: #22314d;
+  --text: #e8ecf3;
+  --text-muted: #8ca0bf;
+  --accent: #4cd9c0;
+  --accent-dim: #2b6a5f;
+  --danger: #e5626b;
+  --danger-bg: #2a1518;
+  --danger-border: #4a2329;
+  --warn: #f2b84b;
+  --radius: 6px;
+  --font-ui: 'IBM Plex Sans', sans-serif;
+  --font-code: 'IBM Plex Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+a { color: var(--accent); }
+
+header.top {
+  border-bottom: 1px solid var(--panel-border);
+  padding: 20px 32px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+header.top h1 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+header.top .subtitle {
+  color: var(--text-muted);
+  font-size: 13px;
+  font-family: var(--font-code);
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.field {
+  margin-bottom: 18px;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.field input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  color: var(--text);
+  padding: 10px 12px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+button.primary {
+  background: var(--accent);
+  color: #082420;
+  border: none;
+  border-radius: var(--radius);
+  padding: 11px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  cursor: pointer;
+}
+
+button.primary:hover { background: #63e3cc; }
+
+.query-preview {
+  margin-top: 28px;
+}
+
+.query-preview .label {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.query-preview pre {
+  background: var(--bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  font-family: var(--font-code);
+  font-size: 13px;
+  color: var(--accent);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin: 0;
+}
+
+.form-error {
+  color: var(--danger);
+  font-size: 13px;
+  margin-top: 14px;
+}
+
+.form-error[hidden] { display: none; }
+
+/* results page */
+
+.info-bar {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  font-family: var(--font-code);
+  font-size: 13px;
+}
+
+.info-bar .stat .k {
+  color: var(--text-muted);
+  display: block;
+  font-size: 11px;
+  text-transform: lowercase;
+}
+
+.info-bar .stat .v {
+  color: var(--text);
+  font-size: 15px;
+}
+
+table.results {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+table.results th {
+  text-align: left;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 12px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+table.results td {
+  padding: 8px 12px;
+  border-bottom: 1px solid #1a2740;
+  font-family: var(--font-code);
+}
+
+table.results tbody tr:hover { background: rgba(76, 217, 192, 0.05); }
+
+.error-panel {
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.error-panel .error-title {
+  color: var(--danger);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.error-panel .error-item {
+  font-family: var(--font-code);
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.error-panel .error-item .code {
+  color: var(--warn);
+}
+
+.quota-note {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--danger-border);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.state-loading {
+  color: var(--text-muted);
+  font-family: var(--font-code);
+  font-size: 13px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 13px;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employees search — REST entity set demo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <h1>Employees search</h1>
+  <span class="subtitle">4D REST · entity set demo</span>
+</header>
+
+<main>
+  <div class="panel">
+    <form id="search-form">
+
+      <div class="field-row">
+        <div class="field">
+          <label for="baseUrl">REST server base URL</label>
+          <input type="text" id="baseUrl" value="http://127.0.0.1/rest">
+        </div>
+        <div class="field">
+          <label for="dataClass">Data class</label>
+          <input type="text" id="dataClass" value="Employees">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="firstname">First name</label>
+          <input type="text" id="firstname" placeholder="e.g. Mary">
+        </div>
+        <div class="field">
+          <label for="lastname">Last name</label>
+          <input type="text" id="lastname" placeholder="e.g. Moore">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="jobTitle">Job title</label>
+        <input type="text" id="jobTitle" placeholder="e.g. Developer">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="salaryMin">Salary greater than</label>
+          <input type="number" id="salaryMin" placeholder="e.g. 40000">
+        </div>
+        <div class="field">
+          <label for="salaryMax">Salary less than</label>
+          <input type="number" id="salaryMax" placeholder="e.g. 60000">
+        </div>
+      </div>
+
+      <button type="submit" class="primary">Run search</button>
+      <p class="form-error" id="form-error" hidden></p>
+
+      <div class="query-preview">
+        <div class="label">REST query that will be sent</div>
+        <pre id="query-preview">Fill in at least one field to build a query…</pre>
+        <p class="hint">This creates an entity set in memory on the REST session ($method=entityset). The result opens in a new tab.</p>
+      </div>
+
+    </form>
+  </div>
+</main>
+
+<script src="search.js"></script>
+</body>
+</html>

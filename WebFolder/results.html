@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Search results - REST entity set demo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <h1>Search results</h1>
+  <span class="subtitle">4D REST · entity set response</span>
+</header>
+
+<main>
+  <div class="info-bar" id="info-bar" hidden>
+    <div class="stat">
+      <span class="k">results</span>
+      <span class="v" id="result-count">-</span>
+    </div>
+    <div class="stat">
+      <span class="k">entity set</span>
+      <span class="v" id="entity-set">-</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="query-preview">
+      <div class="label">REST query</div>
+      <pre id="query-preview">Loading…</pre>
+    </div>
+
+    <div id="state-loading" class="state-loading">Requesting results…</div>
+    <div id="error-panel" class="error-panel" hidden>
+      <div class="error-title">The REST request failed</div>
+      <div class="error-item" id="error-message"></div>
+    </div>
+    <div id="results-container" hidden></div>
+    <pre id="raw-response" class="query-preview" hidden></pre>
+
+    <a class="back-link" href="search.html">Back to search</a>
+  </div>
+</main>
+
+<script src="results.js"></script>
+</body>
+</html>

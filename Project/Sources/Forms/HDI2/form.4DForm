@@ -1,0 +1,916 @@
+{
+	"destination": "detailScreen",
+	"windowMinWidth": 800,
+	"windowMaxWidth": 32000,
+	"windowMinHeight": 540,
+	"windowMaxHeight": 32000,
+	"width": 960,
+	"height": 950,
+	"menuBar": "Menu Bar #1",
+	"markerHeader": 15,
+	"markerBody": 200,
+	"markerBreak": 220,
+	"markerFooter": 240,
+	"events": [
+		"onLoad",
+		"onCloseBox",
+		"onPageChange"
+	],
+	"method": "method.4dm",
+	"pageFormat": {
+		"paperName": "A4",
+		"paperWidth": "842pt",
+		"paperHeight": "595pt"
+	},
+	"pages": [
+		{
+			"objects": {
+				"Tab Control": {
+					"type": "tab",
+					"top": 20,
+					"left": 20,
+					"width": 920,
+					"height": 910,
+					"sizingX": "grow",
+					"sizingY": "grow",
+					"dataSource": "objTabs",
+					"dataSourceTypeHint": "object",
+					"action": "gotoPage",
+					"events": [
+						"onClick"
+					]
+				},
+				"Check Box": {
+					"type": "checkbox",
+					"text": "Trace",
+					"top": 905,
+					"left": 868,
+					"width": 72,
+					"height": 20,
+					"events": [
+						"onClick"
+					],
+					"dataSource": "btnTrace",
+					"dataSourceTypeHint": "boolean"
+				}
+			}
+		},
+		{
+			"objects": {
+				"information": {
+					"type": "input",
+					"top": 130,
+					"left": 60,
+					"width": 800,
+					"height": 700,
+					"sizingX": "fixed",
+					"sizingY": "fixed",
+					"dataSource": "Infos[0].Description",
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"enterable": false,
+					"styledText": true,
+					"contextMenu": "none",
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"class": "description"
+				}
+			}
+		},
+		{
+			"objects": {
+				"information2": {
+					"type": "input",
+					"top": 50,
+					"left": 60,
+					"width": 850,
+					"height": 200,
+					"sizingY": "fixed",
+					"dataSource": "Infos[1].Description",
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"enterable": false,
+					"styledText": true,
+					"contextMenu": "none",
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"class": "description"
+				},
+				"Input": {
+					"type": "input",
+					"left": 40,
+					"top": 410,
+					"width": 400,
+					"height": 20,
+					"dataSource": "Form:C1466.createEntitySetURL",
+					"enterable": false,
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"Input1": {
+					"type": "input",
+					"left": 120,
+					"top": 500,
+					"width": 500,
+					"height": 230,
+					"enterable": false,
+					"focusable": false,
+					"fill": "#F5F7FA",
+					"dataSource": "Form:C1466.createEntitySetResponse",
+					"sizingY": "fixed"
+				},
+				"CreateEntitySetButton": {
+					"type": "button",
+					"text": "Run",
+					"top": 410,
+					"left": 450,
+					"width": 80,
+					"height": 20,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/CreateEntitySetButton.4dm",
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"Button1": {
+					"type": "button",
+					"text": "Set",
+					"top": 310,
+					"left": 150,
+					"width": 80,
+					"height": 20,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Button1.4dm",
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"Input4": {
+					"type": "input",
+					"left": 630,
+					"top": 300,
+					"width": 300,
+					"height": 430,
+					"enterable": false,
+					"focusable": false,
+					"fill": "#F5F7FA",
+					"dataSource": "Form:C1466.quotas",
+					"sizingY": "fixed"
+				},
+				"List Box": {
+					"type": "listbox",
+					"left": 40,
+					"top": 820,
+					"width": 315,
+					"height": 101,
+					"events": [
+						"onSelectionChange"
+					],
+					"dataSource": "Form:C1466.entitySets",
+					"listboxType": "collection",
+					"selectionMode": "single",
+					"headerHeight": "21px",
+					"rowHeight": "20px",
+					"focusable": false,
+					"scrollbarHorizontal": "hidden",
+					"currentItemPositionSource": "Form:C1466.entitySetIndex",
+					"method": "ObjectMethods/List Box.4dm",
+					"sizingY": "fixed",
+					"columns": [
+						{
+							"header": {
+								"text": "Entity sets ID",
+								"name": "Header1"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"width": 300,
+							"dataSource": "This:C1470.value"
+						}
+					]
+				},
+				"Input3": {
+					"type": "input",
+					"left": 120,
+					"top": 460,
+					"width": 100,
+					"height": 20,
+					"enterable": false,
+					"focusable": false,
+					"fill": "#F5F7FA",
+					"dataSource": "Form:C1466.responseStatus",
+					"sizingY": "fixed"
+				},
+				"ReleaseEntitySetButton": {
+					"type": "button",
+					"text": "Release",
+					"top": 820,
+					"left": 370,
+					"width": 120,
+					"height": 20,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/ReleaseEntitySetButton.4dm",
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"RefreshQuotasButton": {
+					"type": "button",
+					"text": "Refresh",
+					"top": 740,
+					"left": 740,
+					"width": 100,
+					"height": 20,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/RefreshQuotasButton.4dm",
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"Text": {
+					"type": "text",
+					"text": "The Session.quotas object",
+					"top": 270,
+					"left": 630,
+					"width": 250,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#6495ed",
+					"fontSize": 18,
+					"sizingY": "fixed"
+				},
+				"Text1": {
+					"type": "text",
+					"text": "1- Set the maximum number of entity sets allowed in memory for this session",
+					"top": 280,
+					"left": 40,
+					"width": 600,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#008000",
+					"sizingY": "fixed"
+				},
+				"Input6": {
+					"type": "input",
+					"left": 40,
+					"top": 310,
+					"width": 100,
+					"height": 20,
+					"dataSource": "Form:C1466.nbEntitySets",
+					"dataSourceTypeHint": "number",
+					"textAlign": "center",
+					"enterable": false,
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"Text2": {
+					"type": "text",
+					"text": "2- Create an entity set",
+					"top": 380,
+					"left": 40,
+					"width": 200,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#008000",
+					"sizingY": "fixed"
+				},
+				"Text3": {
+					"type": "text",
+					"text": "Status",
+					"top": 460,
+					"left": 20,
+					"width": 80,
+					"height": 20,
+					"textAlign": "right",
+					"sizingY": "fixed"
+				},
+				"Text4": {
+					"type": "text",
+					"text": "Response",
+					"top": 500,
+					"left": 20,
+					"width": 80,
+					"height": 20,
+					"textAlign": "right",
+					"sizingY": "fixed"
+				},
+				"Line": {
+					"type": "line",
+					"top": 370,
+					"left": 40,
+					"width": 580,
+					"height": 0,
+					"stroke": "#008000",
+					"strokeDashArray": [
+						2,
+						6
+					],
+					"sizingY": "fixed"
+				},
+				"Line1": {
+					"type": "line",
+					"top": 750,
+					"left": 40,
+					"width": 580,
+					"height": 0,
+					"stroke": "#008000",
+					"strokeDashArray": [
+						2,
+						6
+					],
+					"sizingY": "fixed"
+				},
+				"Text5": {
+					"type": "text",
+					"text": "3- Entity sets in memory",
+					"top": 760,
+					"left": 40,
+					"width": 200,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#008000",
+					"sizingY": "fixed"
+				},
+				"Text6": {
+					"type": "text",
+					"text": "Select an entity set to release it",
+					"top": 790,
+					"left": 40,
+					"width": 250,
+					"height": 20,
+					"textAlign": "automatic",
+					"fontWeight": "bold",
+					"sizingY": "fixed"
+				},
+				"Info4": {
+					"type": "input",
+					"left": 40,
+					"top": 340,
+					"width": 300,
+					"height": 20,
+					"enterable": false,
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"styledText": true,
+					"dataSource": "LinesCode{1}",
+					"sizingY": "fixed"
+				},
+				"Text7": {
+					"type": "text",
+					"text": "Request: http://127.0.0.1/rest/$entityset/$release",
+					"top": 820,
+					"left": 500,
+					"width": 330,
+					"height": 20,
+					"fontWeight": "bold",
+					"sizingY": "fixed"
+				},
+				"Line3": {
+					"type": "line",
+					"top": 260,
+					"left": 40,
+					"width": 580,
+					"height": 0,
+					"stroke": "#008000",
+					"strokeDashArray": [
+						2,
+						6
+					],
+					"sizingY": "fixed"
+				}
+			},
+			"entryOrder": [
+				"ReleaseEntitySetButton",
+				"Info4",
+				"Input",
+				"Input6"
+			]
+		},
+		{
+			"objects": {
+				"information1": {
+					"type": "input",
+					"top": 50,
+					"left": 60,
+					"width": 850,
+					"height": 130,
+					"sizingY": "fixed",
+					"dataSource": "Infos[2].Description",
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"enterable": false,
+					"styledText": true,
+					"contextMenu": "none",
+					"dragging": "none",
+					"dropping": "custom",
+					"events": [
+						"onDataChange"
+					],
+					"class": "description"
+				},
+				"Input2": {
+					"type": "input",
+					"left": 40,
+					"top": 310,
+					"width": 380,
+					"height": 20,
+					"dataSource": "Form:C1466.createEntitySetURL",
+					"enterable": false,
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"Input5": {
+					"type": "input",
+					"left": 110,
+					"top": 340,
+					"width": 370,
+					"height": 140,
+					"enterable": false,
+					"focusable": false,
+					"fill": "#F5F7FA",
+					"dataSource": "Form:C1466.entitySet0",
+					"sizingY": "fixed"
+				},
+				"CreateEntitySetButton1": {
+					"type": "button",
+					"text": "Run",
+					"top": 310,
+					"left": 430,
+					"width": 80,
+					"height": 20,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/CreateEntitySetButton1.4dm",
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"Button2": {
+					"type": "button",
+					"text": "Set",
+					"top": 200,
+					"left": 320,
+					"width": 80,
+					"height": 20,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Button2.4dm",
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"Input7": {
+					"type": "input",
+					"left": 640,
+					"top": 330,
+					"width": 290,
+					"height": 550,
+					"enterable": false,
+					"focusable": false,
+					"fill": "#F5F7FA",
+					"dataSource": "Form:C1466.quotas",
+					"sizingY": "fixed"
+				},
+				"RefreshQuotasButton1": {
+					"type": "button",
+					"text": "Refresh",
+					"top": 900,
+					"left": 740,
+					"width": 100,
+					"height": 20,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/RefreshQuotasButton1.4dm",
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"Text8": {
+					"type": "text",
+					"text": "The Session.quotas object",
+					"top": 300,
+					"left": 640,
+					"width": 290,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#6495ed",
+					"fontSize": 18,
+					"textAlign": "center",
+					"sizingY": "fixed"
+				},
+				"Text9": {
+					"type": "text",
+					"text": "Default inactivity timeout",
+					"top": 200,
+					"left": 30,
+					"width": 180,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#008000",
+					"textAlign": "right",
+					"sizingY": "fixed"
+				},
+				"Input9": {
+					"type": "input",
+					"left": 220,
+					"top": 200,
+					"width": 80,
+					"height": 20,
+					"dataSource": "Form:C1466.defaultTimeout",
+					"dataSourceTypeHint": "number",
+					"textAlign": "center",
+					"enterable": false,
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"Text10": {
+					"type": "text",
+					"text": "Here no timeout is given, thus the default timeout (20 seconds) is applied",
+					"top": 290,
+					"left": 40,
+					"width": 600,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#008000",
+					"sizingY": "fixed"
+				},
+				"Text12": {
+					"type": "text",
+					"text": "Entity set",
+					"top": 340,
+					"left": 20,
+					"width": 80,
+					"height": 20,
+					"textAlign": "right",
+					"fontWeight": "bold",
+					"stroke": "#9400d3",
+					"sizingY": "fixed"
+				},
+				"Line2": {
+					"type": "line",
+					"top": 260,
+					"left": 40,
+					"width": 850,
+					"height": 0,
+					"stroke": "#008000",
+					"strokeDashArray": [
+						2,
+						6
+					],
+					"sizingY": "fixed"
+				},
+				"Info1": {
+					"type": "input",
+					"left": 50,
+					"top": 230,
+					"width": 450,
+					"height": 20,
+					"enterable": false,
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"styledText": true,
+					"dataSource": "LinesCode{2}",
+					"sizingY": "fixed"
+				},
+				"Button3": {
+					"type": "button",
+					"text": "Set",
+					"top": 200,
+					"left": 790,
+					"width": 80,
+					"height": 20,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/Button3.4dm",
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"Text16": {
+					"type": "text",
+					"text": "Maximum inactivity timeout",
+					"top": 200,
+					"left": 450,
+					"width": 230,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#008000",
+					"textAlign": "right",
+					"sizingY": "fixed"
+				},
+				"Input10": {
+					"type": "input",
+					"left": 690,
+					"top": 200,
+					"width": 80,
+					"height": 20,
+					"dataSource": "Form:C1466.maxTimeout",
+					"dataSourceTypeHint": "number",
+					"textAlign": "center",
+					"enterable": false,
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"Input11": {
+					"type": "input",
+					"left": 40,
+					"top": 530,
+					"width": 380,
+					"height": 20,
+					"dataSource": "Form:C1466.createEntitySet20SecondsURL",
+					"enterable": false,
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"CreateEntitySetButton2": {
+					"type": "button",
+					"text": "Run",
+					"top": 530,
+					"left": 430,
+					"width": 80,
+					"height": 20,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/CreateEntitySetButton2.4dm",
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"Text13": {
+					"type": "text",
+					"text": "Here the 10 seconds timeout is applied because it is < maximum inactivity timeout",
+					"top": 510,
+					"left": 40,
+					"width": 600,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#008000",
+					"sizingY": "fixed"
+				},
+				"Input12": {
+					"type": "input",
+					"left": 40,
+					"top": 760,
+					"width": 380,
+					"height": 20,
+					"dataSource": "Form:C1466.createEntitySet50SecondsURL",
+					"enterable": false,
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"CreateEntitySetButton3": {
+					"type": "button",
+					"text": "Run",
+					"top": 760,
+					"left": 430,
+					"width": 80,
+					"height": 20,
+					"events": [
+						"onClick"
+					],
+					"method": "ObjectMethods/CreateEntitySetButton3.4dm",
+					"focusable": false,
+					"sizingY": "fixed"
+				},
+				"Input13": {
+					"type": "input",
+					"left": 510,
+					"top": 430,
+					"width": 80,
+					"height": 20,
+					"dataSource": "Form:C1466.lifeTime0",
+					"enterable": false,
+					"focusable": false,
+					"fill": "#F5F7FA",
+					"textAlign": "center",
+					"sizingY": "fixed"
+				},
+				"Text15": {
+					"type": "text",
+					"text": "Lifetime = ",
+					"top": 380,
+					"left": 480,
+					"width": 150,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#9400d3",
+					"textAlign": "center",
+					"sizingY": "fixed"
+				},
+				"Input14": {
+					"type": "input",
+					"left": 510,
+					"top": 650,
+					"width": 80,
+					"height": 20,
+					"dataSource": "Form:C1466.lifeTime20",
+					"enterable": false,
+					"focusable": false,
+					"fill": "#F5F7FA",
+					"textAlign": "center",
+					"sizingY": "fixed"
+				},
+				"Input15": {
+					"type": "input",
+					"left": 510,
+					"top": 880,
+					"width": 80,
+					"height": 20,
+					"dataSource": "Form:C1466.lifeTime50",
+					"enterable": false,
+					"focusable": false,
+					"fill": "#F5F7FA",
+					"textAlign": "center",
+					"sizingY": "fixed"
+				},
+				"Input8": {
+					"type": "input",
+					"left": 110,
+					"top": 560,
+					"width": 370,
+					"height": 140,
+					"enterable": false,
+					"focusable": false,
+					"fill": "#F5F7FA",
+					"dataSource": "Form:C1466.entitySet20",
+					"sizingY": "fixed"
+				},
+				"Text19": {
+					"type": "text",
+					"text": "Entity set",
+					"top": 560,
+					"left": 20,
+					"width": 80,
+					"height": 20,
+					"textAlign": "right",
+					"fontWeight": "bold",
+					"stroke": "#9400d3",
+					"sizingY": "fixed"
+				},
+				"Input16": {
+					"type": "input",
+					"left": 110,
+					"top": 790,
+					"width": 370,
+					"height": 140,
+					"enterable": false,
+					"focusable": false,
+					"fill": "#F5F7FA",
+					"dataSource": "Form:C1466.entitySet50",
+					"sizingY": "fixed"
+				},
+				"Text11": {
+					"type": "text",
+					"text": "Entity set",
+					"top": 790,
+					"left": 20,
+					"width": 80,
+					"height": 20,
+					"textAlign": "right",
+					"fontWeight": "bold",
+					"stroke": "#9400d3",
+					"sizingY": "fixed"
+				},
+				"Info2": {
+					"type": "input",
+					"left": 500,
+					"top": 230,
+					"width": 420,
+					"height": 20,
+					"enterable": false,
+					"focusable": false,
+					"fill": "transparent",
+					"borderStyle": "none",
+					"styledText": true,
+					"dataSource": "LinesCode{3}",
+					"sizingY": "fixed"
+				},
+				"Line4": {
+					"type": "line",
+					"top": 180,
+					"left": 40,
+					"width": 850,
+					"height": 0,
+					"stroke": "#008000",
+					"strokeDashArray": [
+						2,
+						6
+					],
+					"sizingY": "fixed"
+				},
+				"Text21": {
+					"type": "text",
+					"text": "Here the 50 seconds timeout is not applied because it is > maximum inactivity timeout",
+					"top": 720,
+					"left": 40,
+					"width": 600,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#008000",
+					"sizingY": "fixed"
+				},
+				"Text14": {
+					"type": "text",
+					"text": "The maximum inactivity timeout (40 seconds) is applied instead",
+					"top": 740,
+					"left": 40,
+					"width": 600,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#008000",
+					"sizingY": "fixed"
+				},
+				"Text20": {
+					"type": "text",
+					"text": "expires - refresh",
+					"top": 400,
+					"left": 480,
+					"width": 150,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#9400d3",
+					"textAlign": "center",
+					"sizingY": "fixed"
+				},
+				"Text17": {
+					"type": "text",
+					"text": "Lifetime = ",
+					"top": 600,
+					"left": 480,
+					"width": 150,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#9400d3",
+					"textAlign": "center",
+					"sizingY": "fixed"
+				},
+				"Text18": {
+					"type": "text",
+					"text": "expires - refresh",
+					"top": 620,
+					"left": 480,
+					"width": 150,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#9400d3",
+					"textAlign": "center",
+					"sizingY": "fixed"
+				},
+				"Text22": {
+					"type": "text",
+					"text": "Lifetime = ",
+					"top": 830,
+					"left": 480,
+					"width": 150,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#9400d3",
+					"textAlign": "center",
+					"sizingY": "fixed"
+				},
+				"Text23": {
+					"type": "text",
+					"text": "expires - refresh",
+					"top": 850,
+					"left": 480,
+					"width": 150,
+					"height": 20,
+					"fontWeight": "bold",
+					"stroke": "#9400d3",
+					"textAlign": "center",
+					"sizingY": "fixed"
+				}
+			}
+		}
+	],
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	},
+	"geometryStamp": 2761,
+	"formClass": "FormHDI2"
+}
