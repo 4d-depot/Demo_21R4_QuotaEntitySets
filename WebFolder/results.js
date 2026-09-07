@@ -5,10 +5,19 @@ const loadingEl = document.getElementById('state-loading');
 const errorPanel = document.getElementById('error-panel');
 const errorMessage = document.getElementById('error-message');
 const resultsContainer = document.getElementById('results-container');
+const loadMoreStatus = document.getElementById('load-more-status');
+const loadMoreSentinel = document.getElementById('load-more-sentinel');
 const rawResponse = document.getElementById('raw-response');
 const infoBar = document.getElementById('info-bar');
 const resultCount = document.getElementById('result-count');
 const entitySet = document.getElementById('entity-set');
+const pageSize = 50;
+let offset = 0;
+let hasMoreResults = true;
+let isLoading = false;
+let table;
+let tableBody;
+let columns = [];
 
 function showError(message) {
   loadingEl.hidden = true;
@@ -29,29 +38,32 @@ function getEntitySet(payload) {
 }
 
 function renderTable(entities) {
-  resultsContainer.innerHTML = '';
-
   if (entities.length === 0) {
-    resultsContainer.textContent = 'No results found.';
+    if (!table) resultsContainer.textContent = 'No results found.';
     resultsContainer.hidden = false;
     return;
   }
 
-  const columns = [...new Set(entities.flatMap((entity) => Object.keys(entity)))];
-  const table = document.createElement('table');
-  table.className = 'results';
+  const nextColumns = [...new Set([...columns, ...entities.flatMap((entity) => Object.keys(entity))])];
+  if (!table) {
+    table = document.createElement('table');
+    table.className = 'results';
+    table.innerHTML = '<thead><tr></tr></thead><tbody></tbody>';
+    tableBody = table.querySelector('tbody');
+    resultsContainer.appendChild(table);
+  }
 
-  const head = document.createElement('thead');
-  const headerRow = document.createElement('tr');
-  columns.forEach((column) => {
-    const cell = document.createElement('th');
-    cell.textContent = column;
-    headerRow.appendChild(cell);
-  });
-  head.appendChild(headerRow);
-  table.appendChild(head);
+  if (nextColumns.length !== columns.length) {
+    const headerRow = table.querySelector('thead tr');
+    headerRow.innerHTML = '';
+    nextColumns.forEach((column) => {
+      const cell = document.createElement('th');
+      cell.textContent = column;
+      headerRow.appendChild(cell);
+    });
+    columns = nextColumns;
+  }
 
-  const body = document.createElement('tbody');
   entities.forEach((entity) => {
     const row = document.createElement('tr');
     columns.forEach((column) => {
@@ -62,11 +74,16 @@ function renderTable(entities) {
         : typeof value === 'object' ? JSON.stringify(value) : String(value);
       row.appendChild(cell);
     });
-    body.appendChild(row);
+    tableBody.appendChild(row);
   });
-  table.appendChild(body);
-  resultsContainer.appendChild(table);
   resultsContainer.hidden = false;
+}
+
+function pageUrl() {
+  const url = new URL(apiUrl, window.location.href);
+  url.searchParams.set('$top', pageSize);
+  url.searchParams.set('$skip', offset);
+  return url.toString();
 }
 
 async function loadResults() {
@@ -77,8 +94,12 @@ async function loadResults() {
 
   queryPreview.textContent = apiUrl;
 
+  if (isLoading || !hasMoreResults) return;
+  isLoading = true;
+  loadMoreStatus.hidden = offset === 0;
+
   try {
-    const response = await fetch(apiUrl, { headers: { Accept: 'application/json' } });
+    const response = await fetch(pageUrl(), { headers: { Accept: 'application/json' } });
     const responseText = await response.text();
     let payload;
 
@@ -96,18 +117,32 @@ async function loadResults() {
     const entities = getEntities(payload);
     loadingEl.hidden = true;
     infoBar.hidden = false;
-    resultCount.textContent = entities ? entities.length : '-';
+    resultCount.textContent = entities ? offset + entities.length : '-';
     entitySet.textContent = getEntitySet(payload);
 
     if (entities) {
       renderTable(entities);
+      offset += entities.length;
+      hasMoreResults = entities.length === pageSize;
+      loadMoreSentinel.hidden = !hasMoreResults;
     } else {
       rawResponse.textContent = JSON.stringify(payload, null, 2);
       rawResponse.hidden = false;
+      hasMoreResults = false;
     }
   } catch (error) {
     showError(error instanceof Error ? error.message : 'An unexpected error occurred.');
+    hasMoreResults = false;
+  } finally {
+    isLoading = false;
+    loadMoreStatus.hidden = true;
   }
 }
 
+const observer = new IntersectionObserver((entries) => {
+  if (entries.some((entry) => entry.isIntersecting)) loadResults();
+});
+
+observer.observe(loadMoreSentinel);
+loadMoreSentinel.hidden = false;
 loadResults();
