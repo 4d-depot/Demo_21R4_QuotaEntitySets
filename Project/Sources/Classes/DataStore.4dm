@@ -14,10 +14,10 @@ exposed Function authentify($credentials : Object) : Boolean
 		
 		Session:C1714.setPrivileges("demo")
 		
-		If ($credentials.identifier="Intern")
-			Session:C1714.quotas.nbEntitySets:=3
-			Session:C1714.quotas.defaultEntitySetTimeout:=120
-		End if 
+		//If ($credentials.identifier="Intern")
+		//Session.quotas.nbEntitySets:=3
+		//Session.quotas.defaultEntitySetTimeout:=90
+		//End if 
 		
 		$result:=True:C214
 	End if 
@@ -30,10 +30,4 @@ exposed Function logout()
 	
 	Session:C1714.clearPrivileges()
 	Session:C1714.quotas.nbEntitySets:=Null:C1517
-	
-	
-	
-exposed Function releaseEntitySets($entitySets : Collection)
-	
-	$i:=1
 	

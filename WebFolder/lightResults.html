@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Light results - REST entity set demo</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <h1>Light results</h1>
+  <span class="subtitle">4D REST · entity set response</span>
+</header>
+
+<main>
+  <div class="panel">
+    <div class="query-preview">
+      <div class="label">Entity set</div>
+      <pre id="entity-set-reference">Loading...</pre>
+    </div>
+
+    <div id="state-loading" class="state-loading">Requesting results...</div>
+    <div id="error-panel" class="error-panel" hidden>
+      <div class="error-title">The REST request failed</div>
+      <div class="error-item" id="error-message"></div>
+    </div>
+    <div id="results-container" hidden></div>
+
+    <div class="actions-row">
+      <a class="back-link" href="results.html">Back to results</a>
+    </div>
+  </div>
+</main>
+
+<script src="lightResults.js"></script>
+</body>
+</html>

@@ -2,6 +2,7 @@ const params = new URLSearchParams(window.location.search);
 let apiUrl = sessionStorage.getItem('apiUrl') || localStorage.getItem('apiUrl') || params.get('apiUrl');
 const queryPreview = document.getElementById('query-preview');
 const logoutButton = document.getElementById('logout-button');
+const lightViewButton = document.getElementById('light-view-button');
 const loadingEl = document.getElementById('state-loading');
 const errorPanel = document.getElementById('error-panel');
 const errorMessage = document.getElementById('error-message');
@@ -193,6 +194,12 @@ async function loadResults() {
 
 const observer = new IntersectionObserver((entries) => {
   if (entries.some((entry) => entry.isIntersecting)) loadResults();
+});
+
+lightViewButton.addEventListener('click', () => {
+  if (!apiUrl || !apiUrl.includes('/$entityset/')) return;
+
+  window.open(`lightResults.html?entitySet=${encodeURIComponent(apiUrl)}`, '_blank');
 });
 
 logoutButton.addEventListener('click', async () => {
