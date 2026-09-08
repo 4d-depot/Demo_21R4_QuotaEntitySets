@@ -125,6 +125,20 @@ function updatePreview() {
   lastnameInput, jobTitleInput, salaryMinInput, salaryMaxInput
 ].forEach((el) => el.addEventListener('input', updatePreview));
 
+window.addEventListener('message', (event) => {
+  if (event.origin !== window.location.origin) return;
+
+  const entitySetRef = event.data && event.data.entitySetRef;
+  if (event.data?.type !== 'entitySetCreated' || typeof entitySetRef !== 'string') return;
+
+  const refs = getStoredEntitySetRefs();
+  if (!refs.includes(entitySetRef)) {
+    refs.push(entitySetRef);
+    saveStoredEntitySetRefs(refs);
+    renderStoredEntitySetRefs();
+  }
+});
+
 form.addEventListener('submit', (event) => {
   event.preventDefault();
 
@@ -140,7 +154,7 @@ form.addEventListener('submit', (event) => {
   window.open('results.html', '_blank');
 });
 
-async function clearSessionMemoryAndRedirect() {
+async function clearSessionMemory() {
   const storedRefs = getStoredEntitySetRefs();
   const entitySetCollection = Array.isArray(storedRefs)
     ? storedRefs
@@ -150,11 +164,11 @@ async function clearSessionMemoryAndRedirect() {
     : [];
   try {
     if (entitySetCollection.length > 0) {
-      await fetch('/rest/$catalog/releaseEntitySets', {
+      await fetch('/rest/$entityset/$release', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify([entitySetCollection])
+        body: JSON.stringify(entitySetCollection)
       });
     }
   } catch (error) {
@@ -165,21 +179,9 @@ async function clearSessionMemoryAndRedirect() {
   sessionStorage.removeItem('apiUrl');
   sessionStorage.removeItem(ENTITY_SET_STORAGE_KEY);
   renderStoredEntitySetRefs();
-
-  try {
-    await fetch('/rest/$catalog/logout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include'
-    });
-  } catch (error) {
-    // ignore logout request failure and redirect to login page
-  }
-
-  window.location.href = 'login.html';
 }
 
-clearMemoryButton.addEventListener('click', clearSessionMemoryAndRedirect);
+clearMemoryButton.addEventListener('click', clearSessionMemory);
 logoutButton.addEventListener('click', async () => {
   localStorage.removeItem('apiUrl');
   sessionStorage.removeItem('apiUrl');

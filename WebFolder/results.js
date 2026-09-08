@@ -163,6 +163,13 @@ async function loadResults() {
       apiUrl = currentEntitySet;
       sessionStorage.setItem('apiUrl', apiUrl);
       queryPreview.textContent = apiUrl;
+
+      if (window.opener && !window.opener.closed) {
+        window.opener.postMessage(
+          { type: 'entitySetCreated', entitySetRef: currentEntitySet },
+          window.location.origin
+        );
+      }
     }
 
     if (entities) {
