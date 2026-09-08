@@ -55,7 +55,7 @@ function buildUrl() {
 
 function getStoredEntitySetRefs() {
   try {
-    const value = localStorage.getItem(ENTITY_SET_STORAGE_KEY);
+    const value = sessionStorage.getItem(ENTITY_SET_STORAGE_KEY);
     const refs = value ? JSON.parse(value) : [];
 
     if (!Array.isArray(refs)) return [];
@@ -73,7 +73,7 @@ function saveStoredEntitySetRefs(refs) {
     ? refs.filter((ref) => typeof ref === 'string' && ref.trim() !== '').map((ref) => String(ref))
     : [];
 
-  localStorage.setItem(ENTITY_SET_STORAGE_KEY, JSON.stringify(cleanRefs));
+  sessionStorage.setItem(ENTITY_SET_STORAGE_KEY, JSON.stringify(cleanRefs));
 }
 
 function extractEntitySetId(ref) {
@@ -162,7 +162,8 @@ async function clearSessionMemoryAndRedirect() {
   }
 
   localStorage.removeItem('apiUrl');
-  localStorage.removeItem(ENTITY_SET_STORAGE_KEY);
+  sessionStorage.removeItem('apiUrl');
+  sessionStorage.removeItem(ENTITY_SET_STORAGE_KEY);
   renderStoredEntitySetRefs();
 
   try {
@@ -181,7 +182,8 @@ async function clearSessionMemoryAndRedirect() {
 clearMemoryButton.addEventListener('click', clearSessionMemoryAndRedirect);
 logoutButton.addEventListener('click', async () => {
   localStorage.removeItem('apiUrl');
-  localStorage.removeItem(ENTITY_SET_STORAGE_KEY);
+  sessionStorage.removeItem('apiUrl');
+  sessionStorage.removeItem(ENTITY_SET_STORAGE_KEY);
   renderStoredEntitySetRefs();
 
   try {

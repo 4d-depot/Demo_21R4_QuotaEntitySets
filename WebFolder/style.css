@@ -184,7 +184,7 @@ button.primary:hover { background: #066b65; }
 .info-bar .stat .k {
   color: var(--text-muted);
   display: block;
-  font-size: 11px;
+  font-size: 15px;
   text-transform: lowercase;
 }
 

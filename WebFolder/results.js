@@ -1,5 +1,5 @@
 const params = new URLSearchParams(window.location.search);
-const apiUrl = localStorage.getItem('apiUrl') || params.get('apiUrl');
+let apiUrl = sessionStorage.getItem('apiUrl') || localStorage.getItem('apiUrl') || params.get('apiUrl');
 const queryPreview = document.getElementById('query-preview');
 const logoutButton = document.getElementById('logout-button');
 const loadingEl = document.getElementById('state-loading');
@@ -52,7 +52,7 @@ function getEntitySet(payload) {
 
 function getStoredEntitySetRefs() {
   try {
-    const value = localStorage.getItem(ENTITY_SET_STORAGE_KEY);
+    const value = sessionStorage.getItem(ENTITY_SET_STORAGE_KEY);
     const refs = value ? JSON.parse(value) : [];
     return Array.isArray(refs) ? refs : [];
   } catch (error) {
@@ -66,7 +66,7 @@ function rememberEntitySetRef(ref) {
   const refs = getStoredEntitySetRefs();
   if (!refs.includes(ref)) {
     refs.push(ref);
-    localStorage.setItem(ENTITY_SET_STORAGE_KEY, JSON.stringify(refs));
+    sessionStorage.setItem(ENTITY_SET_STORAGE_KEY, JSON.stringify(refs));
   }
 }
 
@@ -153,9 +153,17 @@ async function loadResults() {
     infoBar.hidden = false;
     resultCount.textContent = entities ? offset + entities.length : '-';
 
-    const currentEntitySet = getEntitySet(payload);
+    const responseEntitySet = getEntitySet(payload);
+    const currentEntitySet = responseEntitySet !== '-'
+      ? responseEntitySet
+      : apiUrl.includes('/$entityset/') ? apiUrl : '-';
     entitySet.textContent = currentEntitySet;
     rememberEntitySetRef(currentEntitySet);
+    if (currentEntitySet !== '-') {
+      apiUrl = currentEntitySet;
+      sessionStorage.setItem('apiUrl', apiUrl);
+      queryPreview.textContent = apiUrl;
+    }
 
     if (entities) {
       renderTable(entities);
@@ -182,7 +190,8 @@ const observer = new IntersectionObserver((entries) => {
 
 logoutButton.addEventListener('click', async () => {
   localStorage.removeItem('apiUrl');
-  localStorage.removeItem(ENTITY_SET_STORAGE_KEY);
+  sessionStorage.removeItem('apiUrl');
+  sessionStorage.removeItem(ENTITY_SET_STORAGE_KEY);
 
   try {
     await fetch('/rest/$catalog/logout', {
