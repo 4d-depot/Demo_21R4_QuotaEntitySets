@@ -33,9 +33,23 @@ form.addEventListener('submit', async function (event) {
       ])
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(errorText || 'Authentication failed.');
+    const payloadText = await response.text();
+    let payload = null;
+
+    try {
+      payload = payloadText ? JSON.parse(payloadText) : null;
+    } catch {
+      payload = payloadText;
+    }
+
+    const isAuthSuccess = payload && typeof payload === 'object'
+      ? payload.result === true
+      : payload === true || payload === 'true';
+
+    if (!response.ok || !isAuthSuccess) {
+      status.textContent = 'wrong credentials';
+      status.classList.remove('success');
+      return;
     }
 
     status.textContent = 'Authentication successful. Redirecting...';
@@ -45,7 +59,7 @@ form.addEventListener('submit', async function (event) {
       window.location.href = 'search.html';
     }, 500);
   } catch (error) {
-    status.textContent = error.message || 'Authentication failed.';
+    status.textContent = 'wrong credentials';
     status.classList.remove('success');
   }
 });

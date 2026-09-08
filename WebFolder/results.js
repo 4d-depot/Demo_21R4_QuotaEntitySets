@@ -1,6 +1,7 @@
 const params = new URLSearchParams(window.location.search);
 const apiUrl = sessionStorage.getItem('apiUrl') || params.get('apiUrl');
 const queryPreview = document.getElementById('query-preview');
+const logoutButton = document.getElementById('logout-button');
 const loadingEl = document.getElementById('state-loading');
 const errorPanel = document.getElementById('error-panel');
 const errorMessage = document.getElementById('error-message');
@@ -34,7 +35,18 @@ function getEntities(payload) {
 
 function getEntitySet(payload) {
   if (!payload || Array.isArray(payload)) return '-';
-  return payload.__ENTITYSET || payload.entitySet || payload.__entitySet || '-';
+
+  if (typeof payload === 'string') return payload;
+  if (typeof payload.__ENTITYSET === 'string') return payload.__ENTITYSET;
+  if (typeof payload.__entitySet === 'string') return payload.__entitySet;
+  if (typeof payload.entitySet === 'string') return payload.entitySet;
+  if (payload.entitySet && typeof payload.entitySet.__ENTITYSET === 'string') return payload.entitySet.__ENTITYSET;
+  if (payload.entitySet && typeof payload.entitySet.__entitySet === 'string') return payload.entitySet.__entitySet;
+  if (payload.entitySet && Array.isArray(payload.entitySet) && payload.entitySet.length > 0) {
+    return payload.entitySet[0].id || payload.entitySet[0].__ENTITYSET || '-';
+  }
+
+  return '-';
 }
 
 function renderTable(entities) {
@@ -109,6 +121,9 @@ async function loadResults() {
 
     if (!response.ok) {
       const detail = payload && (payload.__ERROR || payload.error || payload.message);
+      if (response.status === 429) {
+        throw new Error('429 Too Many Requests');
+      }
       throw new Error(detail ? String(detail) : `HTTP ${response.status}`);
     }
 
@@ -139,6 +154,22 @@ async function loadResults() {
 
 const observer = new IntersectionObserver((entries) => {
   if (entries.some((entry) => entry.isIntersecting)) loadResults();
+});
+
+logoutButton.addEventListener('click', async () => {
+  sessionStorage.removeItem('apiUrl');
+
+  try {
+    await fetch('/rest/$catalog/logout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include'
+    });
+  } catch (error) {
+    // ignore logout request failure and redirect to login page
+  }
+
+  window.location.href = 'login.html';
 });
 
 observer.observe(loadMoreSentinel);

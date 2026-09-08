@@ -23,6 +23,13 @@
 				"read": [
 					"demo"
 				]
+			},
+			{
+				"applyTo": "ds.logout",
+				"type": "method",
+				"execute": [
+					"demo"
+				]
 			}
 		]
 	},

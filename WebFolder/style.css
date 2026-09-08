@@ -191,6 +191,7 @@ button.primary:hover { background: #066b65; }
 .info-bar .stat .v {
   color: var(--text);
   font-size: 15px;
+  word-break: break-all;
 }
 
 table.results {
@@ -258,8 +259,27 @@ table.results tbody tr:hover { background: rgba(8, 127, 120, 0.06); }
   margin-top: 24px;
 }
 
+.top-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
 .back-link {
   display: inline-block;
-  margin-top: 24px;
   font-size: 13px;
+}
+
+.logout-button {
+  margin: 0;
 }

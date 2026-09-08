@@ -12,6 +12,8 @@ const salaryMinInput = document.getElementById('salaryMin');
 const salaryMaxInput = document.getElementById('salaryMax');
 const previewEl = document.getElementById('query-preview');
 const errorEl = document.getElementById('form-error');
+const clearMemoryButton = document.getElementById('clear-memory-button');
+const logoutButton = document.getElementById('logout-button');
 
 // Wrap text values with @...@ (4D wildcard) so the search matches values
 // that *contain* the typed text. Drop the leading @ for a "starts with"
@@ -73,5 +75,24 @@ form.addEventListener('submit', (event) => {
   sessionStorage.setItem('apiUrl', url);
   window.open('results.html', '_blank');
 });
+
+async function clearSessionMemoryAndRedirect() {
+  sessionStorage.removeItem('apiUrl');
+
+  try {
+    await fetch('/rest/$catalog/logout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include'
+    });
+  } catch (error) {
+    // ignore logout request failure and redirect to login page
+  }
+
+  window.location.href = 'login.html';
+}
+
+clearMemoryButton.addEventListener('click', clearSessionMemoryAndRedirect);
+logoutButton.addEventListener('click', clearSessionMemoryAndRedirect);
 
 updatePreview();

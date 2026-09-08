@@ -23,3 +23,9 @@ exposed Function authentify($credentials : Object) : Boolean
 	
 	return $result
 	
+	
+	
+exposed Function logout()
+	
+	Session:C1714.clearPrivileges()
+	Session:C1714.quotas.nbEntitySets:=Null:C1517
