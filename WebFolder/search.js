@@ -70,8 +70,8 @@ form.addEventListener('submit', (event) => {
   }
 
   errorEl.hidden = true;
-  const resultsUrl = `results.html?apiUrl=${encodeURIComponent(url)}`;
-  window.open(resultsUrl, '_blank');
+  sessionStorage.setItem('apiUrl', url);
+  window.open('results.html', '_blank');
 });
 
 updatePreview();

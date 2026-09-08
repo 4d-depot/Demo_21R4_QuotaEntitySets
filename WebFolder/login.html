@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authentication — REST entity set demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <h1>Authentication</h1>
+  <span class="subtitle">4D REST · secure access</span>
+</header>
+
+<main>
+  <div class="panel auth-panel">
+    <form id="login-form" class="auth-form" method="post" autocomplete="on">
+      <div class="field">
+        <label for="identifier">Identifier</label>
+        <input type="text" id="identifier" name="identifier" placeholder="Enter your identifier" required>
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="primary">Sign in</button>
+      </div>
+
+      <p id="login-status" class="form-error" hidden></p>
+    </form>
+  </div>
+</main>
+
+<script src="login.js"></script>
+
+</body>
+</html>

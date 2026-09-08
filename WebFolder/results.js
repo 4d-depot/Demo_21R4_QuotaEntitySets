@@ -1,5 +1,5 @@
 const params = new URLSearchParams(window.location.search);
-const apiUrl = params.get('apiUrl');
+const apiUrl = sessionStorage.getItem('apiUrl') || params.get('apiUrl');
 const queryPreview = document.getElementById('query-preview');
 const loadingEl = document.getElementById('state-loading');
 const errorPanel = document.getElementById('error-panel');
@@ -80,10 +80,8 @@ function renderTable(entities) {
 }
 
 function pageUrl() {
-  const url = new URL(apiUrl, window.location.href);
-  url.searchParams.set('$top', pageSize);
-  url.searchParams.set('$skip', offset);
-  return url.toString();
+  const separator = apiUrl.includes('?') ? '&' : '?';
+  return `${apiUrl}${separator}$top=${pageSize}&$skip=${offset}`;
 }
 
 async function loadResults() {

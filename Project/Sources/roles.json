@@ -1,0 +1,42 @@
+{
+	"forceLogin": true,
+	"restrictedByDefault": true,
+	"permissions": {
+		"allowed": [
+			{
+				"applyTo": "ds.authentify",
+				"type": "method",
+				"promote": [
+					"forAuthentication"
+				]
+			},
+			{
+				"applyTo": "Users",
+				"type": "dataclass",
+				"read": [
+					"forAuthentication"
+				]
+			},
+			{
+				"applyTo": "Employees",
+				"type": "dataclass",
+				"read": [
+					"demo"
+				]
+			}
+		]
+	},
+	"privileges": [
+		{
+			"id": "bSQpbn8rYD56c55bn68xmD",
+			"privilege": "forAuthentication",
+			"includes": []
+		},
+		{
+			"id": "jsKCHNsFpQP1xLCtaerVrF",
+			"privilege": "demo",
+			"includes": []
+		}
+	],
+	"roles": []
+}
