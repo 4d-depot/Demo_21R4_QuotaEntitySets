@@ -29,3 +29,10 @@ exposed Function logout()
 	
 	Session:C1714.clearPrivileges()
 	Session:C1714.quotas.nbEntitySets:=Null:C1517
+	
+	
+	
+exposed Function releaseEntitySets($entitySets : Collection)
+	
+	$i:=1
+	

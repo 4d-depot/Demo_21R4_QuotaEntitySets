@@ -30,6 +30,13 @@
 				"execute": [
 					"demo"
 				]
+			},
+			{
+				"applyTo": "ds.releaseEntitySets",
+				"type": "method",
+				"execute": [
+					"demo"
+				]
 			}
 		]
 	},

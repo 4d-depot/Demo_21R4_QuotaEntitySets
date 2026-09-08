@@ -1,5 +1,5 @@
 const params = new URLSearchParams(window.location.search);
-const apiUrl = sessionStorage.getItem('apiUrl') || params.get('apiUrl');
+const apiUrl = localStorage.getItem('apiUrl') || params.get('apiUrl');
 const queryPreview = document.getElementById('query-preview');
 const logoutButton = document.getElementById('logout-button');
 const loadingEl = document.getElementById('state-loading');
@@ -12,6 +12,7 @@ const rawResponse = document.getElementById('raw-response');
 const infoBar = document.getElementById('info-bar');
 const resultCount = document.getElementById('result-count');
 const entitySet = document.getElementById('entity-set');
+const ENTITY_SET_STORAGE_KEY = 'entitySetRefs';
 const pageSize = 50;
 let offset = 0;
 let hasMoreResults = true;
@@ -47,6 +48,26 @@ function getEntitySet(payload) {
   }
 
   return '-';
+}
+
+function getStoredEntitySetRefs() {
+  try {
+    const value = localStorage.getItem(ENTITY_SET_STORAGE_KEY);
+    const refs = value ? JSON.parse(value) : [];
+    return Array.isArray(refs) ? refs : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function rememberEntitySetRef(ref) {
+  if (!ref || ref === '-') return;
+
+  const refs = getStoredEntitySetRefs();
+  if (!refs.includes(ref)) {
+    refs.push(ref);
+    localStorage.setItem(ENTITY_SET_STORAGE_KEY, JSON.stringify(refs));
+  }
 }
 
 function renderTable(entities) {
@@ -131,7 +152,10 @@ async function loadResults() {
     loadingEl.hidden = true;
     infoBar.hidden = false;
     resultCount.textContent = entities ? offset + entities.length : '-';
-    entitySet.textContent = getEntitySet(payload);
+
+    const currentEntitySet = getEntitySet(payload);
+    entitySet.textContent = currentEntitySet;
+    rememberEntitySetRef(currentEntitySet);
 
     if (entities) {
       renderTable(entities);
@@ -157,7 +181,8 @@ const observer = new IntersectionObserver((entries) => {
 });
 
 logoutButton.addEventListener('click', async () => {
-  sessionStorage.removeItem('apiUrl');
+  localStorage.removeItem('apiUrl');
+  localStorage.removeItem(ENTITY_SET_STORAGE_KEY);
 
   try {
     await fetch('/rest/$catalog/logout', {
