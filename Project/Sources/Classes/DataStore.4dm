@@ -16,6 +16,7 @@ exposed Function authentify($credentials : Object) : Boolean
 		
 		If ($credentials.identifier="Intern")
 			Session:C1714.quotas.nbEntitySets:=3
+			Session:C1714.quotas.defaultEntitySetTimeout:=120
 		End if 
 		
 		$result:=True:C214

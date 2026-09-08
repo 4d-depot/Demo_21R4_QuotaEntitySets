@@ -154,7 +154,7 @@ async function clearSessionMemoryAndRedirect() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
-        body: JSON.stringify(entitySetCollection)
+        body: JSON.stringify([entitySetCollection])
       });
     }
   } catch (error) {
@@ -179,7 +179,23 @@ async function clearSessionMemoryAndRedirect() {
 }
 
 clearMemoryButton.addEventListener('click', clearSessionMemoryAndRedirect);
-logoutButton.addEventListener('click', clearSessionMemoryAndRedirect);
+logoutButton.addEventListener('click', async () => {
+  localStorage.removeItem('apiUrl');
+  localStorage.removeItem(ENTITY_SET_STORAGE_KEY);
+  renderStoredEntitySetRefs();
+
+  try {
+    await fetch('/rest/$catalog/logout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include'
+    });
+  } catch (error) {
+    // Ignore logout request failure and redirect to the login page.
+  }
+
+  window.location.href = 'login.html';
+});
 
 renderStoredEntitySetRefs();
 updatePreview();
