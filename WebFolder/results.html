@@ -10,9 +10,6 @@
 
 <header class="top results-header">
   <h1>Search results</h1>
-  <div class="top-actions">
-    <button id="light-view-button" class="primary" type="button">Light view</button>
-  </div>
 </header>
 
 <main>
@@ -28,6 +25,10 @@
   </div>
 
   <div class="panel">
+    <div class="results-panel-actions">
+      <button id="light-view-button" class="primary" type="button">Light view</button>
+    </div>
+
     <div class="query-preview">
       <div class="label">REST query</div>
       <pre id="query-preview">Loading…</pre>
@@ -42,10 +43,6 @@
     <div id="load-more-status" class="state-loading" hidden>Loading more results…</div>
     <div id="load-more-sentinel" class="load-more-sentinel" hidden></div>
     <pre id="raw-response" class="query-preview" hidden></pre>
-
-    <div class="actions-row">
-      <a class="back-link" href="search.html">Back to search</a>
-    </div>
   </div>
 </main>
 

@@ -78,6 +78,16 @@ header.search-header .subtitle {
   margin-top: 4px;
 }
 
+header.light-results-header {
+  display: block;
+  text-align: center;
+}
+
+header.light-results-header .subtitle {
+  display: block;
+  margin-top: 4px;
+}
+
 header.results-header {
   position: relative;
   display: block;
@@ -88,23 +98,22 @@ header.results-header h1 {
   margin-bottom: 0;
 }
 
-header.results-header .top-actions {
-  position: absolute;
-  top: 20px;
-  right: 32px;
-}
-
 header.results-header .subtitle {
   display: block;
   margin-top: 4px;
 }
 
+.results-panel-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.results-panel-actions + .query-preview {
+  margin-top: 20px;
+}
+
 @media (max-width: 640px) {
-  header.results-header .top-actions {
-    position: static;
-    justify-content: center;
-    margin: 12px auto 0;
-  }
+  .results-panel-actions { justify-content: center; }
 }
 
 main {
@@ -247,6 +256,11 @@ button.primary:hover { background: #066b65; }
   color: var(--text);
   font-size: 15px;
   word-break: break-all;
+}
+
+.info-bar .stat:first-child .v {
+  display: block;
+  text-align: center;
 }
 
 .entity-set-list {
