@@ -3,8 +3,6 @@
 // entity-set-creating REST query ($method=entityset) in a new tab.
 
 const form = document.getElementById('search-form');
-const baseUrlInput = document.getElementById('baseUrl');
-const dataClassInput = document.getElementById('dataClass');
 const firstnameInput = document.getElementById('firstname');
 const lastnameInput = document.getElementById('lastname');
 const jobTitleInput = document.getElementById('jobTitle');
@@ -15,6 +13,8 @@ const errorEl = document.getElementById('form-error');
 const entitySetListEl = document.getElementById('entity-set-list');
 const clearMemoryButton = document.getElementById('clear-memory-button');
 const logoutButton = document.getElementById('logout-button');
+const REST_BASE_URL = 'http://127.0.0.1/rest';
+const DATA_CLASS = 'Employees';
 const ENTITY_SET_STORAGE_KEY = 'entitySetRefs';
 
 // Wrap text values with @...@ (4D wildcard) so the search matches values
@@ -44,13 +44,11 @@ function buildFilter() {
 }
 
 function buildUrl() {
-  const base = baseUrlInput.value.trim().replace(/\/+$/, '');
-  const dataClass = dataClassInput.value.trim() || 'Employees';
   const filter = buildFilter();
 
-  if (!base || !filter) return null;
+  if (!filter) return null;
 
-  return `${base}/${dataClass}?$filter=${filter}&$method=entityset`;
+  return `${REST_BASE_URL}/${DATA_CLASS}?$filter=${filter}&$method=entityset`;
 }
 
 function getStoredEntitySetRefs() {
@@ -95,7 +93,7 @@ function renderStoredEntitySetRefs() {
 
   if (!refs.length) {
     const item = document.createElement('li');
-    item.textContent = 'No entity set reference saved yet.';
+    item.textContent = 'No entity set reference created yet.';
     item.classList.add('empty-state');
     entitySetListEl.appendChild(item);
     return;
@@ -121,8 +119,7 @@ function updatePreview() {
 }
 
 [
-  baseUrlInput, dataClassInput, firstnameInput,
-  lastnameInput, jobTitleInput, salaryMinInput, salaryMaxInput
+  firstnameInput, lastnameInput, jobTitleInput, salaryMinInput, salaryMaxInput
 ].forEach((el) => el.addEventListener('input', updatePreview));
 
 window.addEventListener('message', (event) => {

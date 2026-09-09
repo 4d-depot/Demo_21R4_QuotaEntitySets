@@ -8,25 +8,13 @@
 </head>
 <body>
 
-<header class="top">
+<header class="top search-header">
   <h1>Employees search</h1>
-  <span class="subtitle">4D REST · entity set demo</span>
 </header>
 
 <main>
   <div class="panel">
     <form id="search-form">
-
-      <div class="field-row">
-        <div class="field">
-          <label for="baseUrl">REST server base URL</label>
-          <input type="text" id="baseUrl" value="http://127.0.0.1/rest">
-        </div>
-        <div class="field">
-          <label for="dataClass">Data class</label>
-          <input type="text" id="dataClass" value="Employees">
-        </div>
-      </div>
 
       <div class="field-row">
         <div class="field">
@@ -45,20 +33,22 @@
       </div>
 
       <div class="field-row">
-         <div class="field">
-          <label for="salaryMax">Salary less than</label>
-          <input type="number" id="salaryMax" placeholder="e.g. 60000">
-        </div>
         <div class="field">
           <label for="salaryMin">Salary greater than</label>
           <input type="number" id="salaryMin" placeholder="e.g. 40000">
         </div>
+        <div class="field">
+          <label for="salaryMax">Salary less than</label>
+          <input type="number" id="salaryMax" placeholder="e.g. 60000">
+        </div>
       </div>
 
-      <div class="actions-row">
+      <div class="actions-row search-actions">
         <button type="submit" class="primary">Run search</button>
-        <button id="clear-memory-button" type="button" class="primary logout-button">Clear memory</button>
-        <button id="logout-button" type="button" class="primary logout-button">Logout</button>
+        <div class="secondary-actions">
+          <button id="clear-memory-button" type="button" class="primary logout-button">Clear memory</button>
+          <button id="logout-button" type="button" class="primary logout-button">Logout</button>
+        </div>
       </div>
       <p class="form-error" id="form-error" hidden></p>
 
@@ -69,7 +59,7 @@
       </div>
 
       <div class="query-preview stored-entity-sets-panel">
-        <div class="label">Stored entity set references</div>
+        <div class="label">Entity set references</div>
         <ul id="entity-set-list" class="entity-set-list"></ul>
       </div>
 
