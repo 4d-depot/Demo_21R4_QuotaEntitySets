@@ -334,18 +334,6 @@ table.results tbody tr:hover { background: rgba(8, 127, 120, 0.06); }
   margin-bottom: 6px;
 }
 
-.error-panel .error-item .code {
-  color: var(--warn);
-}
-
-.quota-note {
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid var(--danger-border);
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
 .state-loading {
   color: var(--text-muted);
   font-family: var(--font-code);
@@ -355,13 +343,6 @@ table.results tbody tr:hover { background: rgba(8, 127, 120, 0.06); }
 .load-more-sentinel {
   height: 1px;
   margin-top: 24px;
-}
-
-.top-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-left: auto;
 }
 
 .actions-row {
@@ -382,11 +363,6 @@ table.results tbody tr:hover { background: rgba(8, 127, 120, 0.06); }
   display: flex;
   justify-content: space-between;
   margin-top: 12px;
-}
-
-.back-link {
-  display: inline-block;
-  font-size: 13px;
 }
 
 .logout-button {
