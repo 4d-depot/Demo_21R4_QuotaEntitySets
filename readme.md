@@ -6,6 +6,8 @@ Learn the quota management mechanism in REST sessions.
 
 Find more information on the [blogpost](https://blog.4d.com/keep-your-rest-server-performing-at-its-best).
 
+The demo has been vibe-coded with AI.
+
 ## Installing and Using a 4D Project
 
 ### Pre-requisites
