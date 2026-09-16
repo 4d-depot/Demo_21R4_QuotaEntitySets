@@ -1,10 +1,10 @@
-# HDI_REST_Server_quotas
+# Demo Webinar 4D 21 R4 about REST entity sets
 
-Description (4D 21 R4)
+Description 
 
 Learn the quota management mechanism in REST sessions.
 
-Find more information on the [blog post](https://blog.4d.com/keep-your-rest-server-performing-at-its-best).
+Find more information on the [blogpost](https://blog.4d.com/keep-your-rest-server-performing-at-its-best).
 
 ## Installing and Using a 4D Project
 
